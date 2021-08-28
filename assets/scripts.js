@@ -28,9 +28,8 @@ var questions = [
   ];
 
 // Var list:
-var score = 0; // final score based on time left
 var counter = 0; // Spot in the questions array
-var questionChoices = document.querySelector(".questionChoices"); // Question choices
+var questionChoices = document.querySelectorAll(".questionChoices"); // Question choices
 var startBtn = document.getElementById("startBtn"); // start button
 var userInput = []; // 
 var timeLeft = 75 // starting time
@@ -39,9 +38,9 @@ var penalty = 10; // reduce time
 var timerEl = document.getElementById('countdown');
 // Start the quiz when start button is clicked
 
-function startQuiz() {
+function startQuiz(answer) {
   hideWelcome();
-  questionDisplay();
+  questionDisplay(answer);
   timer();
 }
 
@@ -50,20 +49,27 @@ function timer() {
   var timeInterval = setInterval(function() {
 
     if (counter > 4 && timeLeft > 0){
-  timerEl.textContent = timeLeft 
+    timerEl.textContent = timeLeft 
 
-  }   else if (timeLeft > 0 && counter < 4){
-  timeLeft--;
-  timerEl.textContent = timeLeft;
+  }   
+    else if (timeLeft > 0 && counter < 4){
+    timeLeft--;
+    timerEl.textContent = timeLeft;
   
-  }   else if (timeLeft < 0 && counter < 4 ){
-  clearInterval(timeInterval);
-  // displayMessage = "Your time is up!"
-  }
+  }   
+    //else if (timeLeft < 0 && counter < 4 ){
+    //clearInterval(timeInterval);
+    // displayMessage = "Your time is up!"
+  //}
   },1000);
 }
 
-
+function checkAnswer(answer) {
+  questions[counter].answer
+  if (questions[counter].answer != answer) {
+    timeLeft -= penalty
+  }
+}
 
 // Reduce time by 10 seconds if question is wrong
 
@@ -75,13 +81,18 @@ function hideWelcome() {
 // Create new question when question is answered
 // Provide questions
 
-function questionDisplay() {
+function questionDisplay(answer) {
+        if (answer != "start-button") {
+          checkAnswer(answer);
+          counter++
+        }
+        
         document.getElementById("questionText").textContent = questions[counter].title;
         document.getElementById("optionA").textContent = questions[counter].choices[0];
         document.getElementById("optionB").textContent = questions[counter].choices[1];
         document.getElementById("optionC").textContent = questions[counter].choices[2];
         document.getElementById("optionD").textContent = questions[counter].choices[3];
-        counter++
+        
 }
 
 console.log(questions[3].title)
@@ -93,5 +104,12 @@ console.log(questions[3].title)
 
 
 // Add start button event listener
-startBtn.addEventListener("click", startQuiz);
-questionChoices.addEventListener("click", questionDisplay);
+startBtn.addEventListener("click", ()=>startQuiz(startBtn.getAttribute("data-answer")));
+
+// Loops through question choices
+questionChoices.forEach((question, i)=>{
+  question.setAttribute("data-answer", i)
+  question.addEventListener("click", ()=>questionDisplay(question.getAttribute("data-answer")))
+  
+
+});
