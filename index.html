@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/style.css">
+    <title>Timed Quiz</title>
+</head>
+<body>
+    <header>
+        <p>Time: <span id="countdown"></span></p>
+        <a id="scores"> <!--make link to score list-->
+            View high scores
+        </a>
+    </header>
+    <main id="Welcome-Page">
+        <h1>Welcome to the Quiz!</h1>
+        <p>This quiz will have 5 questions and be limited to 75 seconds. Any question you get wrong will take 10 seconds off.</p>
+        <button id="startBtn">Start Quiz</button>
+    </main>
+
+    <div id="questionsPage">
+        <h2 id="questionText"></h2>
+        <div id="questionChoices">
+            <p>
+                <div>
+                    <button class="questionChoices" id="optionA" data-answer="0"></button>
+                    <button class="questionChoices" id="optionB" data-answer="0"></button>
+                    <button class="questionChoices" id="optionC" data-answer="0"></button>
+                    <button class="questionChoices" id="optionD" data-answer="0"></button>
+                </div>
+                <p id="correct-wrong"></p>
+            </p>
+        </div>
+    </div>
+
+
+    <script src="./assets/scripts.js"></script>
+</body>
+</html>
