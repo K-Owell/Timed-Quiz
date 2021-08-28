@@ -36,7 +36,9 @@ var userInput = []; //
 var timeLeft = 75 // starting time
 var holdInterval;
 var penalty = 10; // reduce time
+var timerEl = document.getElementById('countdown');
 // Start the quiz when start button is clicked
+
 function startQuiz() {
   hideWelcome();
   questionDisplay();
@@ -47,9 +49,21 @@ function startQuiz() {
 function timer() {
   var timeInterval = setInterval(function() {
 
-  })
+    if (counter > 4 && timeLeft > 0){
+  timerEl.textContent = timeLeft 
+
+  }   else if (timeLeft > 0 && counter < 4){
+  timeLeft--;
+  timerEl.textContent = timeLeft;
   
+  }   else if (timeLeft < 0 && counter < 4 ){
+  clearInterval(timeInterval);
+  // displayMessage = "Your time is up!"
+  }
+  },1000);
 }
+
+
 
 // Reduce time by 10 seconds if question is wrong
 
