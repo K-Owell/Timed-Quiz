@@ -49,9 +49,9 @@ function startQuiz(answer) {
 function timer() {
   var timeInterval = setInterval(function() {
 
-    if (counter > 4 && timeLeft > 0){
-    timerEl.textContent = timeLeft 
-
+    if (counter === 5 || timeLeft === 0){
+    clearInterval(timeInterval);
+    scoreScreen();
   }   
     else if (timeLeft > 0 && counter < 4){
     timeLeft--;
@@ -74,12 +74,13 @@ function checkAnswer(answer) {
 
 // Reduce time by 10 seconds if question is wrong
 
-// Hides the welcome screen when start button is clicked
+// Hides the welcome screen when start button is clicked, displays buttons after button is clicked
 function hideWelcome() {
   document.getElementById("questionChoices").style.display = "flex";
   document.getElementById("Welcome-Page").style.display = "none";
-  
 }
+
+
 
 // Create new question when question is answered
 // Provide questions
@@ -89,22 +90,39 @@ function questionDisplay(answer) {
           checkAnswer(answer);
           counter++
         }
-        
+        if (counter < 5) {
         document.getElementById("questionText").textContent = questions[counter].title;
         document.getElementById("optionA").textContent = questions[counter].choices[0];
         document.getElementById("optionB").textContent = questions[counter].choices[1];
         document.getElementById("optionC").textContent = questions[counter].choices[2];
         document.getElementById("optionD").textContent = questions[counter].choices[3];
-        
+        }
+        else {
+          document.getElementById("questionText").style.display = "none"
+          document.getElementById("questionChoices").style.display = "none"
+        }
 }
 
-console.log(questions[3].title)
 // End the quiz when all questions are answered / when timer hits 0
 
 // Prompt user to enter initials
 
-// Save score as remaining time with provided initials
 
+
+// Save score as remaining time with provided initials
+function scoreScreen() {
+  var input = document.createElement("input");
+  var body = document.body;
+  var userScore = timeLeft;
+  var h2El = document.createElement('h2');
+
+  h2El.textContent = 'Your final score is ' + userScore + ": Please enter your initials.";
+  body.appendChild(h2El);
+
+  input.setAttribute('style', 'margin-top: 5%; margin-left: 50%; display: flex-box; justify-content: center;');
+  input.placeholder = "Your initials";
+  body.appendChild(input);
+}
 
 // Add start button event listener
 startBtn.addEventListener("click", ()=>startQuiz(startBtn.getAttribute("data-answer")));

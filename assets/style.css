@@ -23,6 +23,12 @@ header {
     font-size: large;
 }
 
+header a {
+  text-decoration: underline;
+  color:hsl(0, 0%, 0%);
+
+}
+
 main {
     padding-top: 30px;
     padding-left: 20px;
@@ -37,7 +43,7 @@ h2 {
 }
 
 #startBtn {
-    border: none;
+  border: none;
   background-color: rgb(63, 167, 63); 
   border-radius: 25px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px
@@ -73,6 +79,15 @@ h2 {
   padding: 14px 34px;
   text-align: center;
   cursor: pointer;
+}
+
+form {
+  display: none;
+}
+
+.initials {
+  display: flex;
+  justify-content: center;
 }
 
 @media screen and (max-width: 900) {
