@@ -38,6 +38,7 @@ var penalty = 10; // reduce time
 var timerEl = document.getElementById('countdown');
 // Start the quiz when start button is clicked
 
+// Main function to run when start button is clicked
 function startQuiz(answer) {
   hideWelcome();
   questionDisplay(answer);
@@ -75,7 +76,9 @@ function checkAnswer(answer) {
 
 // Hides the welcome screen when start button is clicked
 function hideWelcome() {
+  document.getElementById("questionChoices").style.display = "flex";
   document.getElementById("Welcome-Page").style.display = "none";
+  
 }
 
 // Create new question when question is answered
@@ -111,5 +114,4 @@ questionChoices.forEach((question, i)=>{
   question.setAttribute("data-answer", i)
   question.addEventListener("click", ()=>questionDisplay(question.getAttribute("data-answer")))
   
-
 });
