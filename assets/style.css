@@ -103,6 +103,16 @@ form {
   justify-content: center;
 }
 
+#highscore {
+  padding: 10px 35px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  top: 0;
+  font-size: 1.5vw;
+  font-weight: bold;
+}
+
 @media screen and (max-width: 900) {
     
 }

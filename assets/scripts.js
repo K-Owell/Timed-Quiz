@@ -37,6 +37,8 @@ var holdInterval;
 var penalty = 10; // reduce time
 var timerEl = document.getElementById('countdown');
 
+var scores = JSON.parse(localStorage.getItem("Quiz Score")) || [];
+
 // Start the quiz when start button is clicked
 // Main function to run when start button is clicked
 function startQuiz(answer) {
@@ -52,7 +54,6 @@ function timer() {
     if (counter === 5 || timeLeft === 0){
     clearInterval(timeInterval);
     scoreScreen();
-    document.getElementById("header").style.display = "none";
     }   
       else if (timeLeft > 0 && counter <5){
       timeLeft--;
@@ -96,7 +97,6 @@ function questionDisplay(answer) {
 
 // Store user provided info and score in local storage
 
-
 // Prompt user to enter initials && set score as remaining time with provided initials
 function scoreScreen() {
   var input = document.createElement("input");
@@ -104,12 +104,8 @@ function scoreScreen() {
   var userScore = timeLeft;
   var h2El = document.createElement('h2');
   var submit = document.createElement('button');
-  var score = {
-    name: userInput,
-    score: userScore
-  }
-  
-  h2El.textContent = 'Your final score is. ' + userScore + "Please enter your initials:";
+
+  h2El.textContent = 'Your final score is ' + userScore + ". Please enter your initials:";
   body.appendChild(h2El);
 
   input.setAttribute('id', 'initials');
@@ -126,16 +122,26 @@ function scoreScreen() {
     event.preventDefault();
 
     userInput.push(initials.value);
-    })
-    
-    function storeScore() {
-      localStorage.setItem("userInput", userInput);
-      localStorage.setItem("userScore", userScore);
-      
+    storeScore();
+    var Final = {
+      Name: userInput,
+      Score: timeLeft
     }
+    scores.push(Final);
+    localStorage.setItem("Quiz Score", JSON.stringify(scores));
+    scorePage();
+    })
     
 }
 
+function scorePage() {
+  location.href = "HighScore.html"
+}
+
+function storeScore() {
+      localStorage.setItem("Name", [userInput]);
+      localStorage.setItem("Score", timeLeft);
+    }
 
 // Add start button event listener
 startBtn.addEventListener("click", ()=>startQuiz(startBtn.getAttribute("data-answer")));
