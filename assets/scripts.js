@@ -104,11 +104,15 @@ function scoreScreen() {
   var userScore = timeLeft;
   var h2El = document.createElement('h2');
   var submit = document.createElement('button');
-
-  h2El.textContent = 'Your final score is ' + userScore + ": Please enter your initials.";
+  var score = {
+    name: userInput,
+    score: userScore
+  }
+  
+  h2El.textContent = 'Your final score is. ' + userScore + "Please enter your initials:";
   body.appendChild(h2El);
 
-  input.className = "initials";
+  input.setAttribute('id', 'initials');
   input.setAttribute('style', 'margin-top: 5%; margin-left: 45%;');
   input.placeholder = "Your initials";
   body.appendChild(input);
@@ -117,18 +121,20 @@ function scoreScreen() {
   submit.setAttribute('style', 'margin-top: 5%; margin-left: 45%;');
   submit.textContent = 'Submit';
   body.appendChild(submit);
-  
-  function storeScore() {
-    submit.addEventListener("click", function(event) {
+
+  submit.addEventListener("click", function(event) {
     event.preventDefault();
 
-    userInput.push(className.initials);
-    console.log(userInput);
+    userInput.push(initials.value);
     })
-  }
-
+    
+    function storeScore() {
+      localStorage.setItem("userInput", userInput);
+      localStorage.setItem("userScore", userScore);
+      
+    }
+    
 }
-
 
 
 // Add start button event listener
