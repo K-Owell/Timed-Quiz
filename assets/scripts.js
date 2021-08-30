@@ -52,8 +52,9 @@ function timer() {
     if (counter === 5 || timeLeft === 0){
     clearInterval(timeInterval);
     scoreScreen();
+    document.getElementById("header").style.display = "none";
   }   
-    else if (timeLeft > 0 && counter < 4){
+    else if (timeLeft > 0 && counter <5){
     timeLeft--;
     timerEl.textContent = timeLeft;
   
@@ -119,7 +120,7 @@ function scoreScreen() {
   h2El.textContent = 'Your final score is ' + userScore + ": Please enter your initials.";
   body.appendChild(h2El);
 
-  input.setAttribute('style', 'margin-top: 5%; margin-left: 50%; display: flex-box; justify-content: center;');
+  input.setAttribute('style', 'margin-top: 5%; margin-left: 45%;');
   input.placeholder = "Your initials";
   body.appendChild(input);
 }
