@@ -88,6 +88,12 @@ h2 {
   cursor: pointer;
 }
 
+.score-screen {
+  display: none;
+  margin-top: 5%; 
+  margin-left: 45%;
+}
+
 form {
   display: none;
 }

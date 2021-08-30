@@ -36,8 +36,8 @@ var timeLeft = 75 // starting time
 var holdInterval;
 var penalty = 10; // reduce time
 var timerEl = document.getElementById('countdown');
-// Start the quiz when start button is clicked
 
+// Start the quiz when start button is clicked
 // Main function to run when start button is clicked
 function startQuiz(answer) {
   hideWelcome();
@@ -53,19 +53,15 @@ function timer() {
     clearInterval(timeInterval);
     scoreScreen();
     document.getElementById("header").style.display = "none";
-  }   
-    else if (timeLeft > 0 && counter <5){
-    timeLeft--;
-    timerEl.textContent = timeLeft;
-  
-  }   
-    //else if (timeLeft < 0 && counter < 4 ){
-    //clearInterval(timeInterval);
-    // displayMessage = "Your time is up!"
-  //}
-  },1000);
+    }   
+      else if (timeLeft > 0 && counter <5){
+      timeLeft--;
+      timerEl.textContent = timeLeft;
+      }   
+    },1000);
 }
 
+// Reduce time by 10 seconds if question is wrong
 function checkAnswer(answer) {
   questions[counter].answer
   if (questions[counter].answer != answer) {
@@ -73,19 +69,13 @@ function checkAnswer(answer) {
   }
 }
 
-// Reduce time by 10 seconds if question is wrong
-
 // Hides the welcome screen when start button is clicked, displays buttons after button is clicked
 function hideWelcome() {
   document.getElementById("questionChoices").style.display = "flex";
   document.getElementById("Welcome-Page").style.display = "none";
 }
 
-
-
 // Create new question when question is answered
-// Provide questions
-
 function questionDisplay(answer) {
         if (answer != "start-button") {
           checkAnswer(answer);
@@ -104,26 +94,42 @@ function questionDisplay(answer) {
         }
 }
 
-// End the quiz when all questions are answered / when timer hits 0
-
-// Prompt user to enter initials
+// Store user provided info and score in local storage
 
 
-
-// Save score as remaining time with provided initials
+// Prompt user to enter initials && set score as remaining time with provided initials
 function scoreScreen() {
   var input = document.createElement("input");
   var body = document.body;
   var userScore = timeLeft;
   var h2El = document.createElement('h2');
+  var submit = document.createElement('button');
 
   h2El.textContent = 'Your final score is ' + userScore + ": Please enter your initials.";
   body.appendChild(h2El);
 
+  input.className = "initials";
   input.setAttribute('style', 'margin-top: 5%; margin-left: 45%;');
   input.placeholder = "Your initials";
   body.appendChild(input);
+
+  submit.className = "questionChoices"
+  submit.setAttribute('style', 'margin-top: 5%; margin-left: 45%;');
+  submit.textContent = 'Submit';
+  body.appendChild(submit);
+  
+  function storeScore() {
+    submit.addEventListener("click", function(event) {
+    event.preventDefault();
+
+    userInput.push(className.initials);
+    console.log(userInput);
+    })
+  }
+
 }
+
+
 
 // Add start button event listener
 startBtn.addEventListener("click", ()=>startQuiz(startBtn.getAttribute("data-answer")));
@@ -132,5 +138,6 @@ startBtn.addEventListener("click", ()=>startQuiz(startBtn.getAttribute("data-ans
 questionChoices.forEach((question, i)=>{
   question.setAttribute("data-answer", i)
   question.addEventListener("click", ()=>questionDisplay(question.getAttribute("data-answer")))
-  
 });
+
+
